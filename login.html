@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Registration</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #dbeafe, #93c5fd);
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            display: flex;
+            width: 800px;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            border-radius: 15px;
+            overflow: hidden;
+            height: 400px;
+        }
+        .left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: #3b82f6;
+            color: black;
+            text-align: center;
+        }
+        .right {
+            flex: 1.5;
+            padding: 40px;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #60a5fa;
+            border-radius: 8px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            background: #3b82f6;
+            color: white;
+            cursor: pointer;
+        }
+        .form-container {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            font-size: 18px;
+        }
+        .popup.show {
+            display: block;
+        }
+
+        @keyframes fadeInText {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+#animated-text {
+    display: inline-block;
+    opacity: 0;
+    animation: fadeInText 1s ease-in-out forwards;
+    color:white;
+}
+
+#animated-text:nth-child(1) { animation-delay: 1s; }
+#animated-text:nth-child(2) { animation-delay: 1s; }
+#animated-text:nth-child(3) { animation-delay: 1s; }
+#animated-text:nth-child(4) { animation-delay: 1s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <h1 class="company-name">S<span style="color: white;">QU</span>AR<span style="color: white;">E</span> BO<span style="color: white;">OK</span></h1>
+            <img src="c:\Users\Sunil Dethariya\OneDrive\Pictures\free-logo1.png" alt="Company Logo" style="width: 150px; margin-bottom: 10px;">
+            <p id="animated-text">Welcome to our platform</p>
+        </div>
+        <div class="right">
+            <div id="loginForm" class="form-container active">
+                <h2>Login</h2>
+                <input type="text" id="loginMobile" placeholder="Mobile No" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <button onclick="loginUser()">Login</button>
+                <p>Don't have an account? <a href="#" onclick="showRegister()">Register</a></p>
+            </div>
+            <div id="registerForm" class="form-container">
+                <h2>Register</h2>
+                <input type="text" id="regUsername" placeholder="User Name" required>
+                <input type="text" id="regMobile" placeholder="Mobile No" required>
+                <input type="password" id="regPassword" placeholder="Password" required>
+                <button onclick="registerUser()">Register</button>
+                <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+            </div>
+        </div>
+    </div>
+    <div id="popup" class="popup"></div>
+    <script>
+        let users = {};
+    
+        function showLogin() {
+            document.getElementById('loginForm').classList.add('active');
+            document.getElementById('registerForm').classList.remove('active');
+        }
+        function showRegister() {
+            document.getElementById('registerForm').classList.add('active');
+            document.getElementById('loginForm').classList.remove('active');
+        }
+        function showPopup(message) {
+            let popup = document.getElementById('popup');
+            popup.innerText = message;
+            popup.classList.add('show');
+            setTimeout(() => popup.classList.remove('show'), 3000);
+        }
+        function registerUser() {
+            let username = document.getElementById('regUsername').value;
+            let mobile = document.getElementById('regMobile').value;
+            let password = document.getElementById('regPassword').value;
+            let usernamePattern = /^[A-Za-z][A-Za-z0-9]*$/;
+            let mobilePattern = /^[0-9]{10}$/;
+            
+            if (!username || !mobile || !password) {
+                showPopup("Please fill all required fields");
+                return;
+            }
+            if (!usernamePattern.test(username)) {
+                showPopup("Username cannot start with a digit");
+                return;
+            }
+            if (!mobilePattern.test(mobile)) {
+                showPopup("Enter a valid 10-digit mobile number");
+                return;
+            }
+            if (password.length < 6) {
+                showPopup("Password must be at least 6 characters");
+                return;
+            }
+            users[mobile] = password;
+            showPopup("Registration Successful! Please Login.");
+            showLogin();
+        }
+        function loginUser() {
+            let mobile = document.getElementById('loginMobile').value;
+            let password = document.getElementById('loginPassword').value;
+            if (!mobile || !password) {
+                showPopup("Please fill all required fields");
+                return;
+            }
+            if (users[mobile] && users[mobile] === password) {
+                showPopup("Login Successful!");
+                setTimeout(() => {
+                    window.location.href = "website.html"; // Redirect after success
+                }, 2000);
+            } else {
+                showPopup("You are not registered or incorrect password");
+            }
+        }
+    </script>
+    
+</body>
+</html>
