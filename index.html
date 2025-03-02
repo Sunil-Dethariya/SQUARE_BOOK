@@ -3,12 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Square Book</title>
+    <title>Centered Button</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f3f4f6;
+            margin: 0;
+        }
+        .button {
+            background-color: #1e40af;
+            color: white;
+            font-size: 18px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease-in-out;
+        }
+        .button:hover {
+            background-color: #172554;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.7);
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Square Book</h1>
-    <p>This is the homepage of your website.</p>
 
-    
+    <form action="login.html">
+        <button type="submit" class="button">SQUARE BOOK</button>
+    </form>
+
 </body>
 </html>
