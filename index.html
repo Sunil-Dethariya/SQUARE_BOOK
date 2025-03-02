@@ -3,16 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centered Button</title>
+    <title>SQUARE BOOK</title>
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
             background-color: #f3f4f6;
             margin: 0;
+            font-family: Arial, sans-serif;
         }
+
+        /* Header */
+        .header {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            text-align: center;
+            background: linear-gradient(to right, #1e40af, #172554);
+            color: white;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Button */
         .button {
             background-color: #1e40af;
             color: white;
@@ -24,17 +42,39 @@
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
             transition: all 0.3s ease-in-out;
         }
+
         .button:hover {
             background-color: #172554;
             box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.7);
         }
+
+        /* Footer */
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background-color: #1e40af;
+            color: white;
+            padding: 10px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body>
 
-    <form action="login.html">
+    <!-- Header -->
+    <div class="header">Created by Sunil Dethariya</div>
+
+    <!-- Button Form -->
+    <form action="form.html">
         <button type="submit" class="button">SQUARE BOOK</button>
     </form>
+
+    <!-- Footer -->
+    <div class="footer">© 2025 Sunil Dethariya | SQUARE BOOK</div>
 
 </body>
 </html>
